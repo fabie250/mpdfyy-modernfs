@@ -1,0 +1,39 @@
+name: probe
+
+on:
+  push:
+    paths:
+      - '.github/workflows/probe.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Probe CDN
+        run: |
+          set +e
+          code=$(curl -sSL --max-time 40 -o /tmp/z.zip -w '%{http_code}' "https://aka.doubaocdn.com/s/NhJw4YJcQj")
+          rc=$?
+          size=$(stat -c %s /tmp/z.zip 2>/dev/null || echo 0)
+          {
+            echo "curl_exit=$rc"
+            echo "http_code=$code"
+            echo "size=$size"
+            echo "which_unzip=$(command -v unzip || echo missing)"
+            echo "which_curl=$(command -v curl || echo missing)"
+          } > probe.txt
+          cat probe.txt
+
+      - name: Commit probe result
+        run: |
+          git config user.name "fabie250"
+          git config user.email "fabie250@users.noreply.github.com"
+          git add -A
+          git commit -m "chore: probe result [skip ci]"
+          git push
