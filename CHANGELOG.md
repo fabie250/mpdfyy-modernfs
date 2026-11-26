@@ -30,3 +30,4 @@
 
 - 默认删除模式调整为专属回收站，而不是直接删除。
 - 前端资源改为 `go:embed` 内嵌，不再依赖外部文件目录。
+- 许可证由 MIT 变更为 GNU General Public License v3.0（GPL-3.0）。
