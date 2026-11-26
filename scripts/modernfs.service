@@ -1,0 +1,19 @@
+[Unit]
+Description=ModernFS file sharing service
+Documentation=https://github.com/mpdfyy/mpdfyy-modernfs
+After=network.target
+
+[Service]
+Type=simple
+User=modernfs
+Group=modernfs
+WorkingDirectory=/opt/modernfs
+ExecStart=/opt/modernfs/modernfs -file=/etc/modernfs/modernfs.ini
+Restart=always
+RestartSec=3
+LimitNOFILE=65535
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

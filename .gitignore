@@ -1,0 +1,37 @@
+# ---- 构建产物 ----
+modernfs-linux-amd64
+modernfs-linux-arm64
+modernfs-darwin-arm64
+modernfs-darwin-amd64
+modernfs-windows-amd64.exe
+config-writer.exe
+cmd/config-writer/config-writer.exe
+*.exe
+*.dll
+
+# ---- 本地配置与凭据（含明文密码，绝不提交）----
+modernfs.ini
+modernfs.ini.bak-*
+*.ini
+!examples/*.ini
+.modernfs_secret
+.modernfs_shares.json
+.modernfs_trash
+.modernfs_trash.json
+.modernfs_trash/
+
+# ---- 运行时数据 ----
+log/
+logs/
+*.log
+snapshots/
+modernfs-thumbs/
+tls/
+
+# ---- 编辑器与系统 ----
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
